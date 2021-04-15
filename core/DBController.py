@@ -1,8 +1,11 @@
+import json
+
 import pony.orm.dbproviders.sqlite
 from pony import orm
 from pony.orm import db_session
-from core.models import collection, item
-import json
+
+from core.models import collection
+from core.models import item
 
 
 class DBController:
@@ -27,8 +30,7 @@ class DBController:
 
     @db_session
     def get_items_by_collection(self, collection_id):
-        c = list(self.collection_model.select(
-            lambda col: col.Id == collection_id))[0]
+        c = list(self.collection_model.select(lambda col: col.Id == collection_id))[0]
         items = []
         for i in list(self.item_model.select(lambda item: item.Collection_id == c)):
             items.append(self.get_item(i.Id))
@@ -43,7 +45,7 @@ class DBController:
             host=i[0].Host,
             method=i[0].Method,
             request=i[0].Request,
-            collection=i[0].Collection_id.Id
+            collection=i[0].Collection_id.Id,
         )
 
     @db_session
@@ -54,14 +56,12 @@ class DBController:
             Host=obj['host'],
             Method=obj['method'],
             Request=obj['request_body'],
-            Collection_id=obj['collection_id']
+            Collection_id=obj['collection_id'],
         )
 
     @db_session
     def add_collection(self, name):
-        return self.collection_model(
-            Name=name
-        )
+        return self.collection_model(Name=name)
 
     @db_session
     def remove_item(self, item_id):
@@ -70,31 +70,26 @@ class DBController:
 
     @db_session
     def remove_collection(self, collection_id):
-        c = list(self.collection_model.select(
-            lambda item: item.Id == collection_id))
+        c = list(self.collection_model.select(lambda item: item.Id == collection_id))
         c[0].delete()
 
     @db_session
     def update_item(self, __object):
         obj = json.loads(__object)
-        i = list(self.item_model.select(
-            lambda item: item.Id == obj['item_id']))
+        i = list(self.item_model.select(lambda item: item.Id == obj['item_id']))
         return i[0].set(
             Name=obj['name'],
             Host=obj['host'],
             Method=obj['method'],
             Request=obj['request_body'],
-            Collection_id=obj['collection_id']
+            Collection_id=obj['collection_id'],
         )
 
     @db_session
     def update_collection(self, __object):
         obj = json.loads(__object)
-        i = list(self.collection_model.select(
-            lambda col: col.Id == obj['collection_id']))
-        return i[0].set(
-            Name=obj['name']
-        )
+        i = list(self.collection_model.select(lambda col: col.Id == obj['collection_id']))
+        return i[0].set(Name=obj['name'])
 
     @db_session
     def export_collections(self):
@@ -114,7 +109,7 @@ class DBController:
                     host=query['host'],
                     method=query['method'],
                     request_body=query['request'],
-                    collection_id=col['id']
+                    collection_id=col['id'],
                 )
                 self.add_item(json.dumps(obj))
         return 'ok'

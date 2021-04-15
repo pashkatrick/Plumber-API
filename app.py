@@ -65,7 +65,7 @@ def __get_port():
     return config('RPC_PORT')
 
 def __get_host():
-    return config('RPC_HOST)  
+    return config('RPC_HOST')
 
 def __get_db():
     return config('DB')   
@@ -73,7 +73,7 @@ def __get_db():
 db = DBController.DBController(db=str(__get_db())) 
 
 def main():
-    addr = 'tcp://' + str(__get_host()) + str(__get_port())
+    addr = 'tcp://' + str(__get_host()) + ':' + str(__get_port())
     s = zerorpc.Server(Api())
     s.bind(addr)
 
