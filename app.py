@@ -57,8 +57,8 @@ class Api(object):
     def export_handler(self):
         return db.export_collections()
 
-    def import_handler(self, import_path):
-        return db.import_collections(path=import_path)
+    def import_handler(self, collections):
+        return db.import_collections(content_to_import=collections)
  
 
 def __get_port():
