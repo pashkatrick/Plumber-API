@@ -4,7 +4,17 @@ from core import ServerController, DBController
 from decouple import config
 import subprocess
 
-db = DBController.DBController(db='pony.db')
+
+def __get_port():
+    return config('RPC_PORT')
+
+def __get_host():
+    return config('RPC_HOST)  
+
+def __get_db():
+    return config('DB')       
+
+db = DBController.DBController(db=str(__get_db()))
 
 
 class Api(object):
@@ -60,13 +70,7 @@ class Api(object):
 
     def import_handler(self, import_path):
         return db.import_collections(path=import_path)
-
-
-def __get_port():
-    return config('RPC_PORT')
-
-def __get_host():
-    return config('RPC_HOST)    
+ 
 
 
 def main():
