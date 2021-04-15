@@ -1,0 +1,9 @@
+helpers
+.helpers
+venv*/
+.venv*/
+__pycache__
+pony.db
+.env
+env
+.DS_Store
