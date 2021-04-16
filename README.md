@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/api_logo.png" style="width:150px"/>
+  <img src="./assets/api_logo.png" width="150"/>
 </p>
 <h1 align="center">Plumber API</h1>
 
@@ -18,10 +18,7 @@
 <p align="center">Thanks <a href="https://github.com/warmuuh/milkman">Milkman</a> and <a href="https://github.com/uw-labs/bloomrpc">Bloom</a> for inpiration.</p>
 
 ## About
-
-I just create a GUI for [GRPCurl](https://github.com/fullstorydev/grpcurl). This is a attempt at creating a simple tool that can speed up GRPC ervises testing process.
-
-<p align="center"><img src="./assets/screenshot.jpg" /></p>
+...
 
 ## ⚡ Important
 
@@ -29,7 +26,6 @@ I just create a GUI for [GRPCurl](https://github.com/fullstorydev/grpcurl). This
 > You can use it only with servers, which support reflection API.
 
 ## Features
-
 ...
 
 ### Requirenments
