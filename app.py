@@ -4,7 +4,19 @@ from core import ServerController, DBController
 from decouple import config
 import subprocess
 import os
+import argparse
 
+from flask import request
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def test():
+    return Api().test()
+
+@app.route('/list', methods=['POST'])
+def method_list():
+    return Api().method_list_handler(request.json['host'])
 
 class Api(object):
 
@@ -73,12 +85,19 @@ def __get_db():
 db = DBController.DBController(db=str(__get_db())) 
 
 def main():
-    addr = 'tcp://' + str(__get_host()) + ':' + str(__get_port())
-    s = zerorpc.Server(Api())
-    s.bind(addr)
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--http', action='store_true')
+    args = parser.parse_args()
 
-    print('start running on {}'.format(addr))
-    s.run()
+    if args.http:
+        app.run(port=__get_port(), host=__get_host())
+
+    else:
+        addr = 'tcp://' + str(__get_host()) + ':' + str(__get_port())
+        s = zerorpc.Server(Api())
+        s.bind(addr)
+        print('start running on {}'.format(addr))
+        s.run()
 
 
 if __name__ == '__main__':
