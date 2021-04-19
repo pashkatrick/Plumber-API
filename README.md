@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/api_logo.png" style="width:150px"/>
+  <img src="./assets/api_logo.png" width="150"/>
 </p>
 <h1 align="center">Plumber API</h1>
 
@@ -23,7 +23,6 @@ That's an API for main project [Plumber RPC](https://github.com/pashkatrick/Plum
 > You can use it only with servers, which support reflection API.
 
 ## Features
-
 ...
 
 ### Requirenments
