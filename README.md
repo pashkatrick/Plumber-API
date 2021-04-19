@@ -9,19 +9,13 @@
   <a href="https://pshktrck.ru/plumber/">
     <img src="https://img.shields.io/badge/changelog-👈-green.svg" />
   </a>
-  <a href="https://t.me/plumberpc">
+  <a href="https://t.me/pashkatwit">
     <img src="https://img.shields.io/badge/telegram-🔔-green.svg" />
   </a>  
 </p>
 
-<p align="center">Like Postman, just for GRPC</p>
-<p align="center">Thanks <a href="https://github.com/warmuuh/milkman">Milkman</a> and <a href="https://github.com/uw-labs/bloomrpc">Bloom</a> for inpiration.</p>
-
 ## About
-
-I just create a GUI for [GRPCurl](https://github.com/fullstorydev/grpcurl). This is a attempt at creating a simple tool that can speed up GRPC ervises testing process.
-
-<p align="center"><img src="./assets/screenshot.jpg" /></p>
+That's an API for main project [Plumber RPC](https://github.com/pashkatrick/Plumber-API) which in turn is a GUI for [GRPCurl](https://github.com/fullstorydev/grpcurl). 
 
 ## ⚡ Important
 
@@ -42,15 +36,3 @@ I just create a GUI for [GRPCurl](https://github.com/fullstorydev/grpcurl). This
 - install it
 - use `docker pull pashkatrick/plumber-api`
 - and `docker run ...`
-
-Create or set data to your .env ([example](https://github.com/pashkatrick/Plumber/blob/tcp-move/env-example), [details](https://pypi.org/project/python-decouple/#usage)), and after that:
-
-```
-- python3 app.py
-```
-
-You can use second instanse of termial, to execute first test command:
-
-```bash
-zerorpc tcp://localhost:1111 test
-```
