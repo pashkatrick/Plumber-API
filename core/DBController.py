@@ -94,13 +94,8 @@ class DBController:
     @db_session
     def export_collections(self):
         return self.get_collections()
-        # with open(path, 'w') as fp:
-        #     json.dump(obj, fp, indent=4)
-        #     return 'ok'
 
-    def import_collections(self, path):
-        with open(path) as f:
-            content_to_import = json.load(f)
+    def import_collections(self, content_to_import):
         for col in content_to_import['collections']:
             self.add_collection(col['collection'])
             for query in col['items']:
