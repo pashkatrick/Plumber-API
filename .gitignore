@@ -6,3 +6,4 @@ __pycache__
 pony.db
 .DS_Store
 grpcurl-lnx-should-rename
+grpcurl-mac

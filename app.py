@@ -5,6 +5,7 @@ from decouple import config
 import subprocess
 import os
 import argparse
+import json
 
 from flask import request
 from flask import Flask
@@ -16,7 +17,25 @@ def test():
 
 @app.route('/list', methods=['POST'])
 def method_list():
-    return Api().method_list_handler(request.json['host'])
+    return Api().method_list_handler(
+        host=request.json['host']
+    )
+
+@app.route('/template', methods=['POST'])
+def get_template():
+    return Api().get_message_template_handler(
+        host=request.json['host'],
+        method=request.json['method']
+    )
+
+@app.route('/send', methods=['POST'])
+def send_request():
+    return Api().send_request_handler(
+        host=request.json['host'],
+        method=request.json['method'],
+        req=json.dumps(request.json['body'])
+    )
+
 
 class Api(object):
 
