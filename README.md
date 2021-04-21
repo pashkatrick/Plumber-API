@@ -31,7 +31,8 @@ That's an API for main project [Plumber RPC](https://github.com/pashkatrick/Plum
 - `docker pull pashkatrick/plumber-api`
 - `docker run --rm -it -p 3535:3535/tcp pashkatrick/plumber-api`
 - or 
-- `docker run --rm -it -p 3636:3636/tcp pashkatrick/plumber-api --http:http --http` (if you wanna postman collab)
+- `docker run --rm -it -p 3636:3636/tcp pashkatrick/plumber-api --http:http --http`
+(if you wanna postman collab)
 
 ## Features Basic
 ...
