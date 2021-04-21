@@ -40,7 +40,7 @@ def send_request():
 class Api(object):
 
     def test(self):
-        return 'Hello, World!'
+        return 'Welocome to gRPC world!'
 
     def method_list_handler(self, host):
         rs = ServerController.RemoteServer(host=host)
