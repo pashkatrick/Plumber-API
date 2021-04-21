@@ -92,6 +92,9 @@ class Api(object):
         return db.import_collections(content_to_import=collections)
  
 
+def __get_http_port():
+    return config('HTTP_PORT')
+
 def __get_port():
     return config('RPC_PORT')
 
@@ -109,7 +112,7 @@ def main():
     args = parser.parse_args()
 
     if args.http:
-        app.run(port=__get_port(), host=__get_host())
+        app.run(port=__get_http_port(), host=__get_host())
 
     else:
         addr = 'tcp://' + str(__get_host()) + ':' + str(__get_port())
