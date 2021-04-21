@@ -22,16 +22,23 @@ That's an API for main project [Plumber RPC](https://github.com/pashkatrick/Plum
 > This version doesn't support import proto files or protosets yet (will be).  
 > You can use it only with servers, which support reflection API.
 
-## Features
-...
-
 ### Requirenments
 
 - Docker
 
-## Build and launch 🚀
+## Get Started 🚀
 
-- download last version build
-- install it
-- use `docker pull pashkatrick/plumber-api`
-- and `docker run ...`
+- `docker pull pashkatrick/plumber-api`
+- `docker run --rm -it -p 3535:3535/tcp pashkatrick/plumber-api`
+- or 
+- `docker run --rm -it -p 3636:3636/tcp pashkatrick/plumber-api --http:http --http`  
+(if you wanna web experience or postman collab)
+
+## Features Basic
+...
+
+## Features HTTP
+**/list** - getting list of available service methods  
+**/template** - getteing gRPC message template  
+**/send** - sending message  
+ 

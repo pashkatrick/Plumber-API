@@ -4,12 +4,43 @@ from core import ServerController, DBController
 from decouple import config
 import subprocess
 import os
+import argparse
+import json
+
+from flask import request
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def test():
+    return Api().test()
+
+@app.route('/list', methods=['POST'])
+def method_list():
+    return Api().method_list_handler(
+        host=request.json['host']
+    )
+
+@app.route('/template', methods=['POST'])
+def get_template():
+    return Api().get_message_template_handler(
+        host=request.json['host'],
+        method=request.json['method']
+    )
+
+@app.route('/send', methods=['POST'])
+def send_request():
+    return Api().send_request_handler(
+        host=request.json['host'],
+        method=request.json['method'],
+        req=json.dumps(request.json['body'])
+    )
 
 
 class Api(object):
 
     def test(self):
-        return 'Hello, World!'
+        return 'Welocome to gRPC world!'
 
     def method_list_handler(self, host):
         rs = ServerController.RemoteServer(host=host)
@@ -61,6 +92,9 @@ class Api(object):
         return db.import_collections(content_to_import=collections)
  
 
+def __get_http_port():
+    return config('HTTP_PORT')
+
 def __get_port():
     return config('RPC_PORT')
 
@@ -73,12 +107,19 @@ def __get_db():
 db = DBController.DBController(db=str(__get_db())) 
 
 def main():
-    addr = 'tcp://' + str(__get_host()) + ':' + str(__get_port())
-    s = zerorpc.Server(Api())
-    s.bind(addr)
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--http', action='store_true')
+    args = parser.parse_args()
 
-    print('start running on {}'.format(addr))
-    s.run()
+    if args.http:
+        app.run(port=__get_http_port(), host=__get_host())
+
+    else:
+        addr = 'tcp://' + str(__get_host()) + ':' + str(__get_port())
+        s = zerorpc.Server(Api())
+        s.bind(addr)
+        print('start running on {}'.format(addr))
+        s.run()
 
 
 if __name__ == '__main__':
