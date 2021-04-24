@@ -42,20 +42,20 @@ class Api(object):
     def test(self):
         return 'Welocome to gRPC world!'
 
-    def method_list_handler(self, host):
-        rs = ServerController.RemoteServer(host=host)
+    def method_list_handler(self, host, metadata):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.get_method_list()
 
-    def get_message_template_handler(self, host, method):
-        rs = ServerController.RemoteServer(host=host)
+    def get_message_template_handler(self, host, method, metadata):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.get_message_template(method=method)
 
-    def send_request_handler(self, host, method, req):
-        rs = ServerController.RemoteServer(host=host)
+    def send_request_handler(self, host, method, req, metadata):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.send_request(request=req, method=method)
 
-    def view_method_scheme_handler(self, host, method):
-        rs = ServerController.RemoteServer(host=host)
+    def view_method_scheme_handler(self, host, method, metadata):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.view_method_scheme(method=method)
 
     def get_collections_handler(self):
