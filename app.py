@@ -18,14 +18,16 @@ def test():
 @app.route('/list', methods=['POST'])
 def method_list():
     return Api().method_list_handler(
-        host=request.json['host']
+        host=request.json['host'],
+        metadata=request.json['metadata']
     )
 
 @app.route('/template', methods=['POST'])
 def get_template():
     return Api().get_message_template_handler(
         host=request.json['host'],
-        method=request.json['method']
+        method=request.json['method'],
+        metadata=request.json['metadata']
     )
 
 @app.route('/send', methods=['POST'])
@@ -33,7 +35,8 @@ def send_request():
     return Api().send_request_handler(
         host=request.json['host'],
         method=request.json['method'],
-        req=json.dumps(request.json['body'])
+        req=json.dumps(request.json['body']),
+        metadata=request.json['metadata']
     )
 
 
@@ -42,20 +45,20 @@ class Api(object):
     def test(self):
         return 'Welocome to gRPC world!'
 
-    def method_list_handler(self, host):
-        rs = ServerController.RemoteServer(host=host)
+    def method_list_handler(self, host, metadata=None):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.get_method_list()
 
-    def get_message_template_handler(self, host, method):
-        rs = ServerController.RemoteServer(host=host)
+    def get_message_template_handler(self, host, method, metadata=None):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.get_message_template(method=method)
 
-    def send_request_handler(self, host, method, req):
-        rs = ServerController.RemoteServer(host=host)
+    def send_request_handler(self, host, method, req, metadata=None):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.send_request(request=req, method=method)
 
-    def view_method_scheme_handler(self, host, method):
-        rs = ServerController.RemoteServer(host=host)
+    def view_method_scheme_handler(self, host, method, metadata=None):
+        rs = ServerController.RemoteServer(host=host, metadata=metadata)
         return rs.view_method_scheme(method=method)
 
     def get_collections_handler(self):
