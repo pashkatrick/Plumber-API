@@ -18,14 +18,16 @@ def test():
 @app.route('/list', methods=['POST'])
 def method_list():
     return Api().method_list_handler(
-        host=request.json['host']
+        host=request.json['host'],
+        metadata=request.json['metadata']
     )
 
 @app.route('/template', methods=['POST'])
 def get_template():
     return Api().get_message_template_handler(
         host=request.json['host'],
-        method=request.json['method']
+        method=request.json['method'],
+        metadata=request.json['metadata']
     )
 
 @app.route('/send', methods=['POST'])
@@ -33,7 +35,8 @@ def send_request():
     return Api().send_request_handler(
         host=request.json['host'],
         method=request.json['method'],
-        req=json.dumps(request.json['body'])
+        req=json.dumps(request.json['body']),
+        metadata=request.json['metadata']
     )
 
 
