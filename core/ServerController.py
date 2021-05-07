@@ -4,13 +4,16 @@ import subprocess
 
 class RemoteServer:
 
-    def __init__(self, host, metadata=None):
+    def __init__(self, host, metadata):
         self.host = host
         self.cmd = './grpcurl'
         self.meta = metadata
 
     def __send_shell(self, command):
-        return subprocess.check_output(f'{self.cmd} -H \'{self.meta}\' {command}', shell=True)
+        if self.meta:
+            return subprocess.check_output(f'{self.cmd} -H \'{self.meta}\' {command}', shell=True)
+        else:
+            return subprocess.check_output(f'{self.cmd} {command}', shell=True)
 
     def __get_service_list(self):
         output = self.__send_shell(f'-plaintext {self.host} list')
