@@ -13,5 +13,6 @@ def item(db, orm, Collection):
         Host = orm.Optional(str)
         Method = orm.Optional(str)
         Request = orm.Optional(str)
+        Meta = orm.Optional(str)
         Collection_id = orm.Required(Collection)
     return Item
