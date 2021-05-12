@@ -45,6 +45,7 @@ class DBController:
             host=i[0].Host,
             method=i[0].Method,
             request=i[0].Request,
+            metadata=i[0].Meta,
             collection=i[0].Collection_id.Id,
         )
 
@@ -56,6 +57,7 @@ class DBController:
             Host=obj['host'],
             Method=obj['method'],
             Request=obj['request_body'],
+            Meta=obj['metadata'],            
             Collection_id=obj['collection_id'],
         )
 
@@ -82,6 +84,7 @@ class DBController:
             Host=obj['host'],
             Method=obj['method'],
             Request=obj['request_body'],
+            Meta=obj['metadata'],
             Collection_id=obj['collection_id'],
         )
 
@@ -104,6 +107,7 @@ class DBController:
                     host=query['host'],
                     method=query['method'],
                     request_body=query['request'],
+                    metadata=query['metadata'],
                     collection_id=col['id'],
                 )
                 self.add_item(json.dumps(obj))

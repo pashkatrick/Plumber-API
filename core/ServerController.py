@@ -11,7 +11,11 @@ class RemoteServer:
 
     def __send_shell(self, command):
         if self.meta:
-            return subprocess.check_output(f'{self.cmd} -H \'{self.meta}\' {command}', shell=True)
+            json_meta = json.loads(self.meta)
+            rpc_headers = ''
+            for header in json_meta:
+                rpc_headers += f'-rpc-header {header}:{json_meta[header]} '
+            return subprocess.check_output(f'{self.cmd} {rpc_headers}{command}', shell=True)
         else:
             return subprocess.check_output(f'{self.cmd} {command}', shell=True)
 
